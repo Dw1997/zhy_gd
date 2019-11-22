@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/ap_bt1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00612929"
+        android:gravity="center|left"
+        android:text="《===" />
+
+    <TextView
+        android:id="@+id/ap_tv1"
+        android:layout_width="match_parent"
+        android:layout_height="77dp"
+        android:text="添加快递员"
+        android:textSize="36sp" />
+
+    <EditText
+        android:id="@+id/ap_et1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="输入手机号"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/ap_et2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="输入名字"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/ap_et3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="输入密码"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/ap_bt2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="添加" />
+</LinearLayout>

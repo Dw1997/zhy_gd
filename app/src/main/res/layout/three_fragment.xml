@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/thfr_tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:gravity="center|left"
+        android:text="TextView"
+        android:textSize="36sp" />
+
+    <Button
+        android:id="@+id/thfr_tv_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="寄快递" />
+
+    <Button
+        android:id="@+id/thfr_bt_send"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="派送快递" />
+
+    <Button
+        android:id="@+id/thfr_bt_two"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="添加快递员" />
+
+    <Button
+        android:id="@+id/thfr_bt_th"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="修改密码" />
+
+    <Button
+        android:id="@+id/thfr_bt_exit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="退出登录" />
+</LinearLayout>
