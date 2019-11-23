@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                     });
                     JSONObject ret = JSONObject.parseObject(json.getString("result"));
-                    Log.d("++++++++++++++++++",ret.getString("name"));
+                    Log.d("++++++++++++++++++",ret.getString("type"));
                     SharePreUtils.setAddr(LoginActivity.this,ret.getString("addr"));
                     SharePreUtils.setName(LoginActivity.this,ret.getString("name"));
                     SharePreUtils.setPass(LoginActivity.this,ret.getString("pass"));

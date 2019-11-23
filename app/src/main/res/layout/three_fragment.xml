@@ -15,19 +15,22 @@
         android:id="@+id/thfr_tv_post"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="寄快递" />
+        android:text="寄快递"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/thfr_bt_send"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="派送快递" />
+        android:text="派送快递"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/thfr_bt_two"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="添加快递员" />
+        android:text="添加快递员"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/thfr_bt_th"
