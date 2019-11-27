@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/ps_bt1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00612929"
+        android:gravity="center|left"
+        android:text="《===" />
+
+    <TextView
+        android:id="@+id/ps_tv1"
+        android:layout_width="match_parent"
+        android:layout_height="118dp"
+        android:text="添加派件"
+        android:textSize="36sp" />
+
+    <EditText
+        android:id="@+id/ps_et1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="输入门户id" />
+
+    <Button
+        android:id="@+id/ps_bt2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="确认添加" />
+</LinearLayout>

@@ -39,6 +39,7 @@ public class ThirdFragment extends Fragment implements View.OnClickListener{
         bt_post = (Button) v.findViewById(R.id.thfr_tv_post);
         bt_send = (Button) v.findViewById(R.id.thfr_bt_send);
         bt_add = (Button) v.findViewById(R.id.thfr_bt_two);
+
         String type = SharePreUtils.getType(getActivity());
         Log.d("thirdfragment+++++",type);
         if(type.equals("0")){
@@ -54,6 +55,8 @@ public class ThirdFragment extends Fragment implements View.OnClickListener{
         bt_change = (Button) v.findViewById(R.id.thfr_bt_th);
         bt_exit = (Button) v.findViewById(R.id.thfr_bt_exit);
 
+        bt_post.setOnClickListener(this);
+        bt_send.setOnClickListener(this);
         bt_add.setOnClickListener(this);
         bt_change.setOnClickListener(this);
         bt_exit.setOnClickListener(this);
@@ -68,6 +71,12 @@ public class ThirdFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         switch(view.getId()){
+            case R.id.thfr_tv_post:
+                startActivity(new Intent(getActivity(),User_sendActivity.class));
+                break;
+            case R.id.thfr_bt_send:
+                startActivity(new Intent(getActivity(),Poster_sendActivity.class));
+                break;
             case R.id.thfr_bt_exit:
                 startActivity(new Intent(getActivity(),LoginActivity.class));
                 break;

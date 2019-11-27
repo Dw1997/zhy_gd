@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/us_bt1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00612929"
+        android:gravity="center|left"
+        android:text="《===" />
+
+    <TextView
+        android:id="@+id/us_tv1"
+        android:layout_width="match_parent"
+        android:layout_height="117dp"
+        android:text="寄快递"
+        android:textSize="36sp" />
+
+    <EditText
+        android:id="@+id/us_et1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="收件人姓名" />
+
+    <EditText
+        android:id="@+id/us_et2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="收件人手机号" />
+
+    <EditText
+        android:id="@+id/us_et3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="收件人地址" />
+
+    <Button
+        android:id="@+id/us_bt2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="确认发送" />
+</LinearLayout>

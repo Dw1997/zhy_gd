@@ -2,7 +2,9 @@ package com.example.zhy_gdapp;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,29 +28,104 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+
 public class SecondFragment extends Fragment {
     private String TAG = "SecondFragment";
     public List<Orders> listod = new ArrayList<Orders>();
     private ListView listView;
     OrderAdapter newop;
+    private Handler handler = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View messageLayout = inflater.inflate(R.layout.two_fragment,container,false);
         listView = (ListView) messageLayout.findViewById(R.id.lv_two);
+        Log.d(TAG,"==============");
+        listod = getorders();
         newop = new OrderAdapter(getActivity(),R.layout.list_item,listod);
-        getorders();
-        newop.notifyDataSetChanged();
         listView.setAdapter(newop);
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    Thread.sleep(2000);
+                    listod = getorders();
+                    handler.sendMessage(handler.obtainMessage(0,listod));
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        try{
+            new Thread(runnable).start();
+            handler = new Handler(){
+                public void handleMessage(Message msg){
+                    if(msg.what==0){
+                        newop.notifyDataSetChanged();
+                    }
+                }
+            };
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return messageLayout;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
     }
 
-    public void getorders(){
+//    public void onResume() {
+//        super.onResume();
+//        String usertype = SharePreUtils.getType(getActivity());
+//        String whoo = "";
+//        if(usertype.equals("2"))
+//            whoo = "poster";
+//        if(usertype.equals("1"))
+//            whoo = "getuser";
+//        String userphone = SharePreUtils.getPhone(getActivity());
+//        String url = "http://dwy.dwhhh.cn/zhy/api/orders?who="+whoo+"&phone="+userphone+"&gp=1";
+//        Log.d(TAG,url);
+//        Runnable runnable = new Runnable() {
+//            @Override
+//            public void run() {
+//                try{
+//                    Thread.sleep(2000);
+//                    listod = GetData.getdata(url);
+//                    handler.sendMessage(handler.obtainMessage(0,listod));
+//
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        };
+//        try{
+//            new Thread(runnable).start();
+//            handler = new Handler(){
+//                public void handleMessage(Message msg){
+//                    if(msg.what==0){
+//                        @SuppressWarnings("unchecked")
+//                        List<Orders> listo = (List<Orders>) msg.obj;
+//                        BinderListData(listo);
+//                    }
+//                }
+//            };
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//    }
+//
+//
+//    public void BinderListData(List<Orders> listos){
+//        newop = new OrderAdapter(getActivity(),R.layout.list_item,listos);
+//        listView.setAdapter(newop);
+//    }
+
+    public List<Orders> getorders(){
+        List<Orders> oo = new ArrayList<Orders>();
         String usertype = SharePreUtils.getType(getActivity());
         String whoo = "";
         if(usertype.equals("2"))
@@ -56,7 +133,7 @@ public class SecondFragment extends Fragment {
         if(usertype.equals("1"))
             whoo = "getuser";
         String userphone = SharePreUtils.getPhone(getActivity());
-        String url = "http://dwy.dwhhh.cn/zhy/api/orders?who="+whoo+"&phone="+userphone+"&gp=1";
+        String url = "http://dwy.dwhhh.cn/zhy/api/orders?who="+whoo+"&phone="+userphone+"&gp=0";
         Log.d("mainactivity",url);
         OkHttpClient client = new OkHttpClient.Builder().build();
         Request request = new Request.Builder().url(url).get().build();
@@ -72,13 +149,13 @@ public class SecondFragment extends Fragment {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String res = response.body().string();
-                Log.d("secondfragmentres",res);
+                Log.d("firstfragment-------res",res);
                 com.alibaba.fastjson.JSONObject json = JSONObject.parseObject(res);
                 if(json.getString("result").length()>5){
 //                    Looper.prepare();
 //                    Toast.makeText(getActivity(),"邮件获取成功",Toast.LENGTH_LONG).show();
 //                    Looper.loop();
-                    Log.d("secondFragemnt--res",json.getString("result").getClass().toString());
+                    Log.d("firstFragemnt--res",json.getString("result").getClass().toString());
                     JSONArray ret = json.getJSONArray("result");
 
                     for(int i=0;i<ret.size();i++){
@@ -92,7 +169,7 @@ public class SecondFragment extends Fragment {
                         String poster = wonm.getString("poster");
                         Log.d("wonm",getpost+orderid);
                         Orders od = new Orders(orderid,getuser,poster,state,getpost,timee);
-                        listod.add(od);
+                        oo.add(od);
                     }
 //                    orderAdapter.notifyDataSetChanged();
                     Log.d("firstfragment",listod.get(0).toString());
@@ -103,9 +180,8 @@ public class SecondFragment extends Fragment {
                     Toast.makeText(getActivity(),"快递获取失败",Toast.LENGTH_LONG).show();
                     Looper.loop();
                 }
-
             }
         });
+        return oo;
     }
-
 }
