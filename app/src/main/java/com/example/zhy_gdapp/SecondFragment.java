@@ -16,7 +16,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.zhy_gdapp.adapter.OrderAdapter;
 import com.example.zhy_gdapp.adapter.OuterAdapter;
+import com.example.zhy_gdapp.adapter.PersonAdapter;
 import com.example.zhy_gdapp.beans.Outorder;
+import com.example.zhy_gdapp.beans.Person;
 import com.example.zhy_gdapp.utils.SharePreUtils;
 
 import java.io.IOException;
@@ -33,25 +35,42 @@ import okhttp3.Response;
 public class SecondFragment extends Fragment {
     private String TAG = "SecondFragment";
     public List<Outorder> listod = new ArrayList<Outorder>();
+    public List<Person> listp = new ArrayList<Person>();
     private ListView listView;
     OuterAdapter newop;
+    PersonAdapter personAdapter;
     private Handler handler = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View messageLayout = inflater.inflate(R.layout.two_fragment,container,false);
-        listView = (ListView) messageLayout.findViewById(R.id.lv_two);
-        Log.d(TAG,"==============");
-        listod = getorders();
-        newop = new OuterAdapter(getActivity(),R.layout.list_item,listod);
-        listView.setAdapter(newop);
+        listView = messageLayout.findViewById(R.id.lv_two);
+        String typee = SharePreUtils.getType(getActivity());
+        Log.d(TAG,typee);
+        if (typee.equals("0"))
+        {
+            listp = getPerson();
+            personAdapter = new PersonAdapter(getActivity(),R.layout.list_item,listp);
+            listView.setAdapter(personAdapter);
+        }
+        if(typee.equals("1") || typee.equals("2")){
+            listod = getorders();
+            newop = new OuterAdapter(getActivity(),R.layout.list_item,listod);
+            listView.setAdapter(newop);
+        }
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 try{
                     Thread.sleep(2000);
-                    listod = getorders();
-                    handler.sendMessage(handler.obtainMessage(0,listod));
+                    if(typee.equals("0")){
+                        listp=getPerson();
+                        handler.sendMessage(handler.obtainMessage(0,listp));
+                    }
+                    if(typee.equals("1") || typee.equals("2")) {
+                        listod = getorders();
+                        handler.sendMessage(handler.obtainMessage(1,listod));
+                    }
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -63,6 +82,9 @@ public class SecondFragment extends Fragment {
             handler = new Handler(){
                 public void handleMessage(Message msg){
                     if(msg.what==0){
+                        personAdapter.notifyDataSetChanged();
+                    }
+                    if (msg.what==1){
                         newop.notifyDataSetChanged();
                     }
                 }
@@ -140,5 +162,60 @@ public class SecondFragment extends Fragment {
             }
         });
         return oo;
+    }
+
+    public List<Person> getPerson(){
+        List<Person> dd = new ArrayList<Person>();
+        String aid = SharePreUtils.getArea(getActivity());
+        String url = "http://dwy.dwhhh.cn/zhy/api/gper?tp=2&aid="+aid;
+        OkHttpClient client = new OkHttpClient.Builder().build();
+        Request request = new Request.Builder().url(url).get().build();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Looper.prepare();
+                Toast.makeText(getActivity(),"网络连接失败",Toast.LENGTH_LONG).show();
+                Looper.loop();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String res = response.body().string();
+                Log.d("firstfragment-------res",res);
+                com.alibaba.fastjson.JSONObject json = JSONObject.parseObject(res);
+                if(json.getString("result").length()>5){
+//                    Looper.prepare();
+//                    Toast.makeText(getActivity(),"邮件获取成功",Toast.LENGTH_LONG).show();
+//                    Looper.loop();
+                    Log.d("firstFragemnt--res",json.getString("result").getClass().toString());
+                    JSONArray ret = json.getJSONArray("result");
+
+                    for(int i=0;i<ret.size();i++){
+                        String woc = ret.get(i).toString();
+                        com.alibaba.fastjson.JSONObject wonm = JSONObject.parseObject(woc);
+                        String userphone = wonm.getString("userphone");
+                        String username = wonm.getString("username");
+                        String userpass = wonm.getString("userpass");
+                        String usertype = wonm.getString("usertype");
+                        String useraddr = wonm.getString("useraddr");
+                        String areaid = wonm.getString("areaid");
+                        Person od = new Person(userphone,username,userpass,usertype,useraddr,areaid);
+                        dd.add(od);
+                    }
+//                    orderAdapter.notifyDataSetChanged();
+                    Log.d("firstfragment",dd.get(0).toString());
+
+                }
+                else{
+                    Looper.prepare();
+                    Toast.makeText(getActivity(),"用户获取失败",Toast.LENGTH_LONG).show();
+                    Looper.loop();
+                }
+
+            }
+        });
+        return  dd;
+
     }
 }
