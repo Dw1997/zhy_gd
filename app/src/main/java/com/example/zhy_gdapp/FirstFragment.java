@@ -2,7 +2,9 @@ package com.example.zhy_gdapp;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,14 +36,40 @@ public class FirstFragment extends Fragment {
     public List<Orders> listo = new ArrayList<Orders>();
     private ListView listview;
     OrderAdapter orderAdapter;
+    private Handler handler = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View messageLayout = inflater.inflate(R.layout.one_fragment,container,false);
         listview = (ListView) messageLayout.findViewById(R.id.lv_one);
+        listo = getorders();
         orderAdapter = new OrderAdapter(getActivity(),R.layout.list_item,listo);
-        getorders();
         listview.setAdapter(orderAdapter);
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    Thread.sleep(2000);
+                    listo = getorders();
+                    handler.sendMessage(handler.obtainMessage(0,listo));
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        try{
+            new Thread(runnable).start();
+            handler = new Handler(){
+                public void handleMessage(Message msg){
+                    if(msg.what==0){
+                        orderAdapter.notifyDataSetChanged();
+                    }
+                }
+            };
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return messageLayout;
     }
 
@@ -50,7 +78,8 @@ public class FirstFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    public void getorders(){
+    public List<Orders> getorders(){
+        List<Orders> oo = new ArrayList<Orders>();
         String usertype = SharePreUtils.getType(getActivity());
         String whoo = "";
         if(usertype.equals("2"))
@@ -94,10 +123,10 @@ public class FirstFragment extends Fragment {
                         String poster = wonm.getString("poster");
                         Log.d("wonm",getpost+orderid);
                         Orders od = new Orders(orderid,getuser,poster,state,getpost,timee);
-                        listo.add(od);
+                        oo.add(od);
                     }
 //                    orderAdapter.notifyDataSetChanged();
-                    Log.d("firstfragment",listo.get(0).toString());
+                    Log.d("firstfragment",oo.get(0).toString());
 
                 }
                 else{
@@ -108,6 +137,7 @@ public class FirstFragment extends Fragment {
 
             }
         });
+        return oo;
     }
 
 }
