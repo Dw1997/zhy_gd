@@ -28,6 +28,7 @@
         <activity android:name=".adminac.AddposterActivity"/>
         <activity android:name=".adminac.ChangepassActivity"/>
         <activity android:name=".User_sendActivity"/>
+        <activity android:name=".Poster_sendActivity"/>
     </application>
 
 </manifest>

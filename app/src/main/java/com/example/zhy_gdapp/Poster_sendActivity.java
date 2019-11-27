@@ -17,8 +17,8 @@ public class Poster_sendActivity extends AppCompatActivity implements View.OnCli
     private EditText et_id;
 
     @Override
-    public void onCreate(Bundle bundle){
-        super.onCreate(bundle);
+    public void onCreate(Bundle saveInstanceState){
+        super.onCreate(saveInstanceState);
         setContentView(R.layout.poster_send);
         InitView();
     }

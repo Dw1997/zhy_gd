@@ -7,7 +7,7 @@
         android:id="@+id/thfr_tv_name"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:gravity="center|left"
+        android:gravity="center"
         android:text="TextView"
         android:textSize="36sp" />
 
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="寄快递"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/thfr_bt_send"

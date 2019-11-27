@@ -15,6 +15,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="TextView"
+            android:textColor="@color/colorAccent"
             android:textSize="30sp" />
 
         <LinearLayout
@@ -27,13 +28,17 @@
                 android:id="@+id/lv_tv2"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="@color/colorAccent"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/lv_tv3"
                 android:layout_width="match_parent"
                 android:layout_height="29dp"
-                android:text="TextView" />
+                android:gravity="bottom"
+                android:text="TextView"
+                android:textColor="@color/colorAccent" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
