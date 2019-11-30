@@ -18,7 +18,7 @@ import com.example.zhy_gdapp.utils.SharePreUtils;
 public class ThirdFragment extends Fragment implements View.OnClickListener{
     private String TAG = "ThirdFragment";
     TextView tv_name;
-    Button bt_post,bt_send,bt_add,bt_change,bt_exit;
+    Button bt_post,bt_send,bt_add,bt_change,bt_exit,bt_outs;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -39,6 +39,7 @@ public class ThirdFragment extends Fragment implements View.OnClickListener{
         bt_post = (Button) v.findViewById(R.id.thfr_tv_post);
         bt_send = (Button) v.findViewById(R.id.thfr_bt_send);
         bt_add = (Button) v.findViewById(R.id.thfr_bt_two);
+        bt_outs = (Button) v.findViewById(R.id.thfr_bt_outs);
 
         String type = SharePreUtils.getType(getActivity());
         Log.d("thirdfragment+++++",type);
@@ -50,11 +51,13 @@ public class ThirdFragment extends Fragment implements View.OnClickListener{
         }
         if(type.equals("2")){
             bt_send.setVisibility(View.VISIBLE);
+            bt_outs.setVisibility(View.VISIBLE);
         }
 
         bt_change = (Button) v.findViewById(R.id.thfr_bt_th);
         bt_exit = (Button) v.findViewById(R.id.thfr_bt_exit);
 
+        bt_outs.setOnClickListener(this);
         bt_post.setOnClickListener(this);
         bt_send.setOnClickListener(this);
         bt_add.setOnClickListener(this);
@@ -85,6 +88,9 @@ public class ThirdFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.thfr_bt_th:
                 startActivity(new Intent(getActivity(), ChangepassActivity.class));
+            case R.id.thfr_bt_outs:
+                startActivity(new Intent(getActivity(),PoseroutActivity.class));
+                break;
         }
     }
 }

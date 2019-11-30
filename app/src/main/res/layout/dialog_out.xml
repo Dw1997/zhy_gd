@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -124,7 +125,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="请输入评论"
+            android:hint="请输入评论/快递单号"
             android:visibility="gone"/>
 
         <TableRow
@@ -133,17 +134,24 @@
 
             <Button
                 android:id="@+id/dio_bt1"
-                android:layout_width="145dp"
+                android:layout_width="95dp"
                 android:layout_height="wrap_content"
                 android:text="评论"
                 android:visibility="gone"/>
 
             <Button
                 android:id="@+id/dio_bt2"
-                android:layout_width="145dp"
+                android:layout_width="95dp"
                 android:layout_height="wrap_content"
                 android:text="提取"
                 android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/dio_bt3"
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:text="提交"
+                android:visibility="gone" />
         </TableRow>
 
     </LinearLayout>

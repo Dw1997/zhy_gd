@@ -26,6 +26,13 @@
         android:visibility="gone"/>
 
     <Button
+        android:id="@+id/thfr_bt_outs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="须寄出快递"
+        android:visibility="gone"/>
+
+    <Button
         android:id="@+id/thfr_bt_two"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -38,7 +38,7 @@ public class Dialog_out extends DialogFragment implements View.OnClickListener{
     private TextView tv1,tv3,tv5,tv7,tv9,tv11;
     private TextView tv2,tv4,tv6,tv8,tv10,tv12;
     private EditText et_c;
-    private Button bt_c,bt_g;
+    private Button bt_c,bt_g,bt_t;
     String typee;
     Outorder outorder;
     private Handler handler = null;
@@ -60,7 +60,16 @@ public class Dialog_out extends DialogFragment implements View.OnClickListener{
             public void run() {
                 try{
                     Thread.sleep(2000);
-                    getposer();
+                    if(typee.equals("1"))
+                        getposer();
+                    if(typee.equals("2")){
+                        tv2.setText(outorder.getUname());
+                        tv4.setText(outorder.getUphone());
+                        tv6.setText(outorder.getUaddr());
+                        tv8.setText(outorder.getGname());
+                        tv10.setText(outorder.getGphone());
+                        tv12.setText(outorder.getGaddr());
+                    }
                     handler.sendMessage(handler.obtainMessage(0,"hhh"));
 
                 } catch (InterruptedException e) {
@@ -103,6 +112,7 @@ public class Dialog_out extends DialogFragment implements View.OnClickListener{
         et_c = v.findViewById(R.id.dio_et1);
         bt_c = v.findViewById(R.id.dio_bt1);
         bt_g = v.findViewById(R.id.dio_bt2);
+        bt_t = v.findViewById(R.id.dio_bt3);
 
         if(typee.equals("1")){
             et_c.setVisibility(View.VISIBLE);
@@ -118,7 +128,13 @@ public class Dialog_out extends DialogFragment implements View.OnClickListener{
             tv4.setText(outorder.getGaddr());
             tv6.setText(outorder.getGphone());
         }else {
-            bt_g.setVisibility(View.VISIBLE);
+            String state = outorder.getState();
+            if(state.equals("0"))
+                bt_g.setVisibility(View.VISIBLE);
+            if(state.equals("1")){
+                bt_t.setVisibility(View.VISIBLE);
+                et_c.setVisibility(View.VISIBLE);
+            }
             tv1.setText("发件人姓名：");
             tv3.setText("发件人手机：");
             tv5.setText("发件人地址：");
@@ -126,17 +142,11 @@ public class Dialog_out extends DialogFragment implements View.OnClickListener{
             tv9.setText("收件人手机：");
             tv11.setText("收件人地址：");
 
-            tv2.setText(outorder.getUname());
-            tv4.setText(outorder.getUphone());
-            tv6.setText(outorder.getUaddr());
-            tv8.setText(outorder.getGname());
-            tv10.setText(outorder.getGphone());
-            tv12.setText(outorder.getGaddr());
         }
-
 
         bt_c.setOnClickListener(this);
         bt_g.setOnClickListener(this);
+        bt_t.setOnClickListener(this);
 
     }
 
@@ -158,6 +168,10 @@ public class Dialog_out extends DialogFragment implements View.OnClickListener{
                 break;
             case R.id.dio_bt2:
                 getit();
+                break;
+
+            case R.id.dio_bt3:
+                tkuidid();
                 break;
         }
     }
@@ -256,6 +270,39 @@ public class Dialog_out extends DialogFragment implements View.OnClickListener{
                 else{
                     Looper.prepare();
                     Toast.makeText(getActivity(),"提取寄件失败",Toast.LENGTH_LONG).show();
+                    Looper.loop();
+                }
+            }
+        });
+    }
+
+    public void tkuidid(){
+        String id = outorder.getId();
+        String kid = et_c.getText().toString();
+        String url = "http://dwy.dwhhh.cn/zhy/api/ansi?id="+id+"&kid="+kid;
+        OkHttpClient client = new OkHttpClient.Builder().build();
+        Request request = new Request.Builder().url(url).get().build();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String res = response.body().string();
+                Log.d("res---------add",res);
+                com.alibaba.fastjson.JSONObject json = JSONObject.parseObject(res);
+                if(json.getString("result").equals("true")){
+
+                    Looper.prepare();
+                    Toast.makeText(getActivity(),"发件成功",Toast.LENGTH_LONG).show();
+                    Looper.loop();
+
+                }
+                else{
+                    Looper.prepare();
+                    Toast.makeText(getActivity(),"发件失败",Toast.LENGTH_LONG).show();
                     Looper.loop();
                 }
             }
