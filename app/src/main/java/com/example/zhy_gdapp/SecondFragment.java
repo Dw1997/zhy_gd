@@ -99,7 +99,7 @@ public class SecondFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                newDialog();
+                newDialog(listod.get(position),typee);
             }
         });
 
@@ -116,10 +116,11 @@ public class SecondFragment extends Fragment {
         List<Outorder> oo = new ArrayList<Outorder>();
         String usertype = SharePreUtils.getType(getActivity());
         String phone = SharePreUtils.getPhone(getActivity());
+        String areaid = SharePreUtils.getArea(getActivity());
         String whoo = "";
         String url="";
         if(usertype.equals("2"))
-            url = "http:dwy.dwhhh.cn/zhy/api/gp";
+            url = "http:dwy.dwhhh.cn/zhy/api/gp?ai="+areaid;
         if(usertype.equals("1"))
             url = "http:dwy.dwhhh.cn/zhy/api/user_out?ph="+phone;
         Log.d(TAG,url);
@@ -152,13 +153,15 @@ public class SecondFragment extends Fragment {
                         String id = wonm.getString("id");
                         String uname = wonm.getString("uname");
                         String uphone = wonm.getString("uphone");
+                        String areaid = wonm.getString("areaid");
                         String uaddr = wonm.getString("uaddr");
                         String gname = wonm.getString("gname");
                         String gphone = wonm.getString("gphone");
                         String gaddr = wonm.getString("gaddr");
                         String time = wonm.getString("time");
                         String state = wonm.getString("state");
-                        Outorder od = new Outorder(id,uname,uphone,uaddr,gname,gphone,gaddr,time,state);
+                        String poster = wonm.getString("poster");
+                        Outorder od = new Outorder(id,uname,uphone,areaid,uaddr,gname,gphone,gaddr,time,state,poster);
                         oo.add(od);
                     }
 //                    orderAdapter.notifyDataSetChanged();
@@ -212,6 +215,7 @@ public class SecondFragment extends Fragment {
                         String useraddr = wonm.getString("useraddr");
                         String areaid = wonm.getString("areaid");
                         Person od = new Person(userphone,username,userpass,usertype,useraddr,areaid);
+                        Log.d(TAG,od.toString());
                         dd.add(od);
                     }
 //                    orderAdapter.notifyDataSetChanged();
@@ -230,8 +234,8 @@ public class SecondFragment extends Fragment {
     }
 
     Dialog_out dialog_out;
-    private void  newDialog(){
-        dialog_out = new Dialog_out();
+    private void  newDialog(Outorder od,String typeee){
+        dialog_out = new Dialog_out(od,typeee);
         final  View view = dialog_out.getView();
         dialog_out.show(getChildFragmentManager(),"dialog_out");
     }

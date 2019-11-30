@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 
 import com.example.zhy_gdapp.R;
 import com.example.zhy_gdapp.beans.Outorder;
+import com.example.zhy_gdapp.utils.SharePreUtils;
 
 import java.util.List;
 
@@ -59,8 +60,12 @@ public class OuterAdapter extends ArrayAdapter {
             holder=(viewHolder) view.getTag();
         }
 
+        String typee = SharePreUtils.getType(getContext());
+        if(typee.equals("1"))
+            holder.tv_na.setText(orders.getGname());
+        else
+            holder.tv_na.setText(orders.getUaddr());
         holder.tv_id.setText(orders.getId());
-        holder.tv_na.setText(orders.getUaddr());
         holder.tv_ti.setText(orders.getTime());
         return view;
     }
@@ -68,4 +73,5 @@ public class OuterAdapter extends ArrayAdapter {
     class viewHolder{
         TextView tv_id,tv_na,tv_ti;
     }
-}
+
+ }

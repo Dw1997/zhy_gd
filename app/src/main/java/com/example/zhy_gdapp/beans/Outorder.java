@@ -1,23 +1,52 @@
 package com.example.zhy_gdapp.beans;
 
 public class Outorder {
-    private String id,uname,uphone,uaddr,gname,gphone,gaddr,time,state;
+    private String id;
+    private String uname;
+    private String uphone;
+    private String areaid;
+    private String uaddr;
+    private String gname;
+    private String gphone;
+    private String gaddr;
+    private String time;
+    private String state;
+    private String poster;
 
-    public Outorder(String id, String uname, String uphone, String uaddr, String gname, String gphone, String gaddr, String time, String state) {
+    public Outorder(String id, String uname, String uphone, String areaid, String uaddr, String gname, String gphone, String gaddr, String time, String state, String poster) {
         this.id = id;
         this.uname = uname;
         this.uphone = uphone;
+        this.areaid = areaid;
         this.uaddr = uaddr;
         this.gname = gname;
         this.gphone = gphone;
         this.gaddr = gaddr;
         this.time = time;
         this.state = state;
+        this.poster = poster;
     }
 
     public Outorder(){
 
     }
+
+    public String getAreaid() {
+        return areaid;
+    }
+
+    public void setAreaid(String areaid) {
+        this.areaid = areaid;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
+
 
     public String getId() {
         return id;
@@ -89,5 +118,22 @@ public class Outorder {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    @Override
+    public String toString() {
+        return "Outorder{" +
+                "id='" + id + '\'' +
+                ", uname='" + uname + '\'' +
+                ", uphone='" + uphone + '\'' +
+                ", areaid='" + areaid + '\'' +
+                ", uaddr='" + uaddr + '\'' +
+                ", gname='" + gname + '\'' +
+                ", gphone='" + gphone + '\'' +
+                ", gaddr='" + gaddr + '\'' +
+                ", time='" + time + '\'' +
+                ", state='" + state + '\'' +
+                ", poster='" + poster + '\'' +
+                '}';
     }
 }

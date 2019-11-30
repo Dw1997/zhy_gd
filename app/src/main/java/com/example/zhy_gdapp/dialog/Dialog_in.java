@@ -86,8 +86,8 @@ public class Dialog_in extends DialogFragment implements View.OnClickListener{
         tv5 = v.findViewById(R.id.dii_tv5);
 
         tv2 = v.findViewById(R.id.dii_tv2);
-        tv6 = v.findViewById(R.id.dii_tv4);
-        tv4 = v.findViewById(R.id.dii_tv6);
+        tv4 = v.findViewById(R.id.dii_tv4);
+        tv6 = v.findViewById(R.id.dii_tv6);
 
         bt1 = v.findViewById(R.id.dii_bt1);
         bt2 = v.findViewById(R.id.dii_bt2);
@@ -129,6 +129,7 @@ public class Dialog_in extends DialogFragment implements View.OnClickListener{
         OkHttpClient client = new OkHttpClient.Builder().build();
         Request request = new Request.Builder().url(url).get().build();
         Call call = client.newCall(request);
+        String finalPhone = phone;
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -154,8 +155,8 @@ public class Dialog_in extends DialogFragment implements View.OnClickListener{
                     tv6.setText(orders.getTimee());
                 }else{
                     tv2.setText(p[0].getUsername());
-                    tv4.setText(p[0].getUserphone());
-                    tv6.setText(p[0].getUseraddr());
+                    tv4.setText(p[0].getUseraddr());
+                    tv6.setText(p[0].getUserphone());
                 }
             }
         });
