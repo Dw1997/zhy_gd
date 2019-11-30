@@ -2,8 +2,10 @@ package com.example.zhy_gdapp.dialog;
 
 import android.annotation.SuppressLint;
 import android.app.DialogFragment;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,13 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.zhy_gdapp.R;
 import com.example.zhy_gdapp.beans.Orders;
 import com.example.zhy_gdapp.beans.Person;
+import com.example.zhy_gdapp.utils.SharePreUtils;
 
 import java.io.IOException;
 
@@ -32,7 +37,8 @@ public class Dialog_in extends DialogFragment implements View.OnClickListener{
     private final static String TAG="Dialog_in";
     private TextView tv1,tv3,tv5;
     private TextView tv2,tv4,tv6;
-    private Button bt1,bt2;
+    private EditText et_c;
+    private Button bt_c,bt_s;
     String typee;
     Orders orders;
     private Handler handler = null;
@@ -89,20 +95,24 @@ public class Dialog_in extends DialogFragment implements View.OnClickListener{
         tv4 = v.findViewById(R.id.dii_tv4);
         tv6 = v.findViewById(R.id.dii_tv6);
 
-        bt1 = v.findViewById(R.id.dii_bt1);
-        bt2 = v.findViewById(R.id.dii_bt2);
+        et_c = v.findViewById(R.id.dii_et1);
+        bt_c = v.findViewById(R.id.dii_bt1);
+        bt_s = v.findViewById(R.id.dii_bt2);
 
-        bt1.setOnClickListener(this);
-        bt2.setOnClickListener(this);
+        bt_c.setOnClickListener(this);
+        bt_s.setOnClickListener(this);
 
         if (typee.equals("1")){
             tv1.setText("快递员  姓名：");
             tv3.setText("快递员手机号：");
             tv5.setText("快递录入时间：");
+            et_c.setVisibility(View.VISIBLE);
+            bt_c.setVisibility(View.VISIBLE);
         }else{
             tv1.setText("收件人  姓名：");
             tv3.setText("收件人门牌号：");
             tv5.setText("收件人手机号：");
+            bt_s.setVisibility(View.VISIBLE);
         }
 
     }
@@ -111,7 +121,10 @@ public class Dialog_in extends DialogFragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.dii_bt1:
-                Log.d(TAG,"hhhhh");
+                comment();
+                break;
+            case R.id.dii_bt2:
+                suresed();
                 break;
         }
     }
@@ -157,6 +170,75 @@ public class Dialog_in extends DialogFragment implements View.OnClickListener{
                     tv2.setText(p[0].getUsername());
                     tv4.setText(p[0].getUseraddr());
                     tv6.setText(p[0].getUserphone());
+                }
+            }
+        });
+    }
+
+    public void comment(){
+        String id = orders.getOrderid();
+        String up = orders.getGetuser();
+        String pp = orders.getPoster();
+        String co = et_c.getText().toString();
+        String url = "http://dwy.dwhhh.cn/zhy/api/uc?id="+id+"&up="+up+"&pp="+pp+"&co="+co;
+        Log.d(TAG,url);
+        OkHttpClient client = new OkHttpClient.Builder().build();
+        Request request = new Request.Builder().url(url).get().build();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String res = response.body().string();
+                Log.d("res---------add",res);
+                com.alibaba.fastjson.JSONObject json = JSONObject.parseObject(res);
+                if(json.getString("result").equals("true")){
+
+                    Looper.prepare();
+                    Toast.makeText(getActivity(),"评论成功",Toast.LENGTH_LONG).show();
+                    Looper.loop();
+
+                }
+                else{
+                    Looper.prepare();
+                    Toast.makeText(getActivity(),"评论失败，您已经评论过",Toast.LENGTH_LONG).show();
+                    Looper.loop();
+                }
+            }
+        });
+    }
+
+    private void suresed(){
+        String oit = orders.getOrderid();
+        String url = "http://dwy.dwhhh.cn/zhy/api/sis?id="+oit;
+        Log.d(TAG,url);
+        OkHttpClient client = new OkHttpClient.Builder().build();
+        Request request = new Request.Builder().url(url).get().build();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String res = response.body().string();
+                Log.d("res---------add",res);
+                com.alibaba.fastjson.JSONObject json = JSONObject.parseObject(res);
+                if(json.getString("result").equals("true")){
+
+                    Looper.prepare();
+                    Toast.makeText(getActivity(),"派送成功",Toast.LENGTH_LONG).show();
+                    Looper.loop();
+
+                }
+                else{
+                    Looper.prepare();
+                    Toast.makeText(getActivity(),"派送失败",Toast.LENGTH_LONG).show();
+                    Looper.loop();
                 }
             }
         });

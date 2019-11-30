@@ -3,7 +3,9 @@ package com.example.zhy_gdapp.dialog;
 import android.annotation.SuppressLint;
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSONObject;
 import com.example.zhy_gdapp.R;
 import com.example.zhy_gdapp.beans.Outorder;
+import com.example.zhy_gdapp.beans.Person;
 import com.example.zhy_gdapp.utils.SharePreUtils;
 
 import java.io.IOException;
@@ -38,6 +41,7 @@ public class Dialog_out extends DialogFragment implements View.OnClickListener{
     private Button bt_c,bt_g;
     String typee;
     Outorder outorder;
+    private Handler handler = null;
 
     @SuppressLint("ValidFragment")
     public Dialog_out(Outorder od, String typeee){
@@ -51,6 +55,32 @@ public class Dialog_out extends DialogFragment implements View.OnClickListener{
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         View view = inflater.inflate(R.layout.dialog_out,container);
         InitView(view);
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    Thread.sleep(2000);
+                    getposer();
+                    handler.sendMessage(handler.obtainMessage(0,"hhh"));
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        try{
+            new Thread(runnable).start();
+            handler = new Handler(){
+                public void handleMessage(Message msg){
+                    if(msg.what==0){
+                        Log.d(TAG,"hhh");
+
+                    }
+                }
+            };
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return view;
     }
 
@@ -82,7 +112,7 @@ public class Dialog_out extends DialogFragment implements View.OnClickListener{
             tv5.setText("收件人手机：");
             tv7.setText("快递员姓名：");
             tv9.setText("快递员手机：");
-            tv11.setText("确认取件时间：");
+            tv11.setText("快递运单号：");
 
             tv2.setText(outorder.getGname());
             tv4.setText(outorder.getGaddr());
@@ -110,6 +140,8 @@ public class Dialog_out extends DialogFragment implements View.OnClickListener{
 
     }
 
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -128,6 +160,36 @@ public class Dialog_out extends DialogFragment implements View.OnClickListener{
                 getit();
                 break;
         }
+    }
+
+    public void getposer(){
+        Outorder od;
+        String id = outorder.getId();
+        String url = "http://dwy.dwhhh.cn/zhy/api/ugp?id="+id;
+        Log.d(TAG,url);
+        OkHttpClient client = new OkHttpClient.Builder().build();
+        Request request = new Request.Builder().url(url).get().build();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String res = response.body().string();
+                com.alibaba.fastjson.JSONObject json = JSONObject.parseObject(res);
+                JSONObject wonm = JSONObject.parseObject(json.getString("result"));
+                String name = wonm.getString("name");
+                String phone = wonm.getString("phone");
+                String kuaidid = wonm.getString("kuaidid");
+
+                tv8.setText(name);
+                tv10.setText(phone);
+                tv12.setText(kuaidid);
+
+            }
+        });
     }
 
     public void comment(){
@@ -164,8 +226,6 @@ public class Dialog_out extends DialogFragment implements View.OnClickListener{
                 }
             }
         });
-
-
     }
 
     public void getit(){

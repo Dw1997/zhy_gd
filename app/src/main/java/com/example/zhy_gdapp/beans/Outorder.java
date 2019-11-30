@@ -12,8 +12,9 @@ public class Outorder {
     private String time;
     private String state;
     private String poster;
+    private String kuaidid;
 
-    public Outorder(String id, String uname, String uphone, String areaid, String uaddr, String gname, String gphone, String gaddr, String time, String state, String poster) {
+    public Outorder(String id, String uname, String uphone, String areaid, String uaddr, String gname, String gphone, String gaddr, String time, String state, String poster, String kuaidid) {
         this.id = id;
         this.uname = uname;
         this.uphone = uphone;
@@ -25,6 +26,7 @@ public class Outorder {
         this.time = time;
         this.state = state;
         this.poster = poster;
+        this.kuaidid = kuaidid;
     }
 
     public Outorder(){
@@ -120,6 +122,14 @@ public class Outorder {
         this.state = state;
     }
 
+    public String getKuaidid() {
+        return kuaidid;
+    }
+
+    public void setKuaidid(String kuaidid) {
+        this.kuaidid = kuaidid;
+    }
+
     @Override
     public String toString() {
         return "Outorder{" +
@@ -134,6 +144,7 @@ public class Outorder {
                 ", time='" + time + '\'' +
                 ", state='" + state + '\'' +
                 ", poster='" + poster + '\'' +
+                ", kuaidid='" + kuaidid + '\'' +
                 '}';
     }
 }

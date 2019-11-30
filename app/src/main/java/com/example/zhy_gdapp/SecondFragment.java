@@ -15,12 +15,10 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.example.zhy_gdapp.adapter.OrderAdapter;
 import com.example.zhy_gdapp.adapter.OuterAdapter;
 import com.example.zhy_gdapp.adapter.PersonAdapter;
 import com.example.zhy_gdapp.beans.Outorder;
 import com.example.zhy_gdapp.beans.Person;
-import com.example.zhy_gdapp.dialog.Dialog_in;
 import com.example.zhy_gdapp.dialog.Dialog_out;
 import com.example.zhy_gdapp.utils.SharePreUtils;
 
@@ -161,7 +159,8 @@ public class SecondFragment extends Fragment {
                         String time = wonm.getString("time");
                         String state = wonm.getString("state");
                         String poster = wonm.getString("poster");
-                        Outorder od = new Outorder(id,uname,uphone,areaid,uaddr,gname,gphone,gaddr,time,state,poster);
+                        String kuaidid = wonm.getString("kuaidid");
+                        Outorder od = new Outorder(id,uname,uphone,areaid,uaddr,gname,gphone,gaddr,time,state,poster,kuaidid);
                         oo.add(od);
                     }
 //                    orderAdapter.notifyDataSetChanged();
