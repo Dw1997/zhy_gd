@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.example.zhy_gdapp.adapter.OrderAdapter;
 import com.example.zhy_gdapp.adapter.PersonAdapter;
 import com.example.zhy_gdapp.beans.Orders;
 import com.example.zhy_gdapp.beans.Person;
+import com.example.zhy_gdapp.dialog.Dialog_in;
 import com.example.zhy_gdapp.utils.SharePreUtils;
 
 
@@ -56,7 +58,7 @@ public class FirstFragment extends Fragment {
         }
         if(typee.equals("1") || typee.equals("2")){
             listo = getorders();
-            orderAdapter = new OrderAdapter(getActivity(),R.layout.list_item,listo);
+            orderAdapter = new OrderAdapter(getActivity(),R.layout.list_item,listo,typee);
             listview.setAdapter(orderAdapter);
         }
         Runnable runnable = new Runnable() {
@@ -93,6 +95,16 @@ public class FirstFragment extends Fragment {
         }catch (Exception e){
             e.printStackTrace();
         }
+
+        if(typee.equals("1") || typee.equals("2")){
+            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    newDialog(listo.get(i),typee);
+                }
+            });
+        }
+
         return messageLayout;
     }
 
@@ -215,7 +227,13 @@ public class FirstFragment extends Fragment {
             }
         });
         return  dd;
+    }
 
+    Dialog_in dialog_in;
+    private void newDialog(Orders odd,String typeee){
+        dialog_in = new Dialog_in(odd,typeee);
+        final  View view = dialog_in.getView();
+        dialog_in.show(getChildFragmentManager(),"dialog_in");
     }
 
 }

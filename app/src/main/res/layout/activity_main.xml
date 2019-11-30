@@ -19,20 +19,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="寄" />
+            android:text="寄"
+            android:textColor="#000005" />
 
         <Button
             android:id="@+id/frg_two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="收" />
+            android:text="收"
+            android:textColor="#000005" />
 
         <Button
             android:id="@+id/frg_tre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="我" />
+            android:text="我"
+            android:textColor="#000005" />
     </LinearLayout>
 </LinearLayout>

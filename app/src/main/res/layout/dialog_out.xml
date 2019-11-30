@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="288dp"
+        android:layout_height="351dp"
+        android:orientation="vertical">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/dio_tv1"
+                android:layout_width="115dp"
+                android:layout_height="match_parent"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/dio_tv2"
+                android:layout_width="170dp"
+                android:layout_height="match_parent"
+                android:text="TextView" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/dio_tv3"
+                android:layout_width="115dp"
+                android:layout_height="match_parent"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/dio_tv4"
+                android:layout_width="170dp"
+                android:layout_height="match_parent"
+                android:text="TextView" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/dio_tv5"
+                android:layout_width="115dp"
+                android:layout_height="match_parent"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/dio_tv6"
+                android:layout_width="170dp"
+                android:layout_height="match_parent"
+                android:text="TextView" />
+        </TableRow>
+
+        <view
+            android:id="@+id/view3"
+            class="androidx.constraintlayout.widget.Guideline"
+            android:layout_width="5px"
+            android:layout_height="wrap_content"
+            android:background="#555555"/>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/dio_tv7"
+                android:layout_width="115dp"
+                android:layout_height="match_parent"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/dio_tv8"
+                android:layout_width="170dp"
+                android:layout_height="match_parent"
+                android:text="TextView" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/dio_tv9"
+                android:layout_width="115dp"
+                android:layout_height="match_parent"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/dio_tv10"
+                android:layout_width="170dp"
+                android:layout_height="match_parent"
+                android:text="TextView" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/dio_tv11"
+                android:layout_width="115dp"
+                android:layout_height="match_parent"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/dio_tv12"
+                android:layout_width="170dp"
+                android:layout_height="match_parent"
+                android:text="TextView" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <Button
+                android:id="@+id/dio_bt1"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/dio_bt2"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+        </TableRow>
+
+    </LinearLayout>
+
+</LinearLayout>

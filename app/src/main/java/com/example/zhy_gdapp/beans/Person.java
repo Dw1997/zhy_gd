@@ -63,4 +63,16 @@ public class Person {
     public void setAreaid(String areaid) {
         this.areaid = areaid;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "userphone='" + userphone + '\'' +
+                ", username='" + username + '\'' +
+                ", userpass='" + userpass + '\'' +
+                ", usertype='" + usertype + '\'' +
+                ", useraddr='" + useraddr + '\'' +
+                ", areaid='" + areaid + '\'' +
+                '}';
+    }
 }

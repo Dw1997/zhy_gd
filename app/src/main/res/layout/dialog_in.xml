@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="289dp"
+        android:layout_height="201dp"
+        android:orientation="vertical">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/dii_tv1"
+                android:layout_width="115dp"
+                android:layout_height="match_parent"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/dii_tv2"
+                android:layout_width="170dp"
+                android:layout_height="match_parent"
+                android:text="TextView" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/dii_tv3"
+                android:layout_width="115dp"
+                android:layout_height="match_parent"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/dii_tv4"
+                android:layout_width="170dp"
+                android:layout_height="match_parent"
+                android:text="TextView" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/dii_tv5"
+                android:layout_width="115dp"
+                android:layout_height="match_parent"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/dii_tv6"
+                android:layout_width="170dp"
+                android:layout_height="match_parent"
+                android:text="TextView" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <Button
+                android:id="@+id/dii_bt1"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/dii_bt2"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+        </TableRow>
+
+    </LinearLayout>
+
+</LinearLayout>

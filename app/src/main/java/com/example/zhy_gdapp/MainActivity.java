@@ -2,6 +2,7 @@ package com.example.zhy_gdapp;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
         }
+        change_button_color(page);
         trans.commit();
 
     }
@@ -111,6 +113,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.frg_tre:
                 setTabSelection(2);
                 break;
+        }
+    }
+
+    public void change_button_color(int page){
+        if(page==0){
+            bt1.setBackgroundColor(Color.parseColor("#AABB66"));
+            bt2.setBackgroundColor(Color.parseColor("#FFFFDD"));
+            bt3.setBackgroundColor(Color.parseColor("#FFFFDD"));
+        }
+        if(page==1){
+            bt2.setBackgroundColor(Color.parseColor("#AABB66"));
+            bt1.setBackgroundColor(Color.parseColor("#FFFFDD"));
+            bt3.setBackgroundColor(Color.parseColor("#FFFFDD"));
+        }
+        if(page==2){
+            bt3.setBackgroundColor(Color.parseColor("#AABB66"));
+            bt2.setBackgroundColor(Color.parseColor("#FFFFDD"));
+            bt1.setBackgroundColor(Color.parseColor("#FFFFDD"));
         }
     }
 

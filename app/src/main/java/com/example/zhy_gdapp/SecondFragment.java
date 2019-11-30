@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,6 +20,8 @@ import com.example.zhy_gdapp.adapter.OuterAdapter;
 import com.example.zhy_gdapp.adapter.PersonAdapter;
 import com.example.zhy_gdapp.beans.Outorder;
 import com.example.zhy_gdapp.beans.Person;
+import com.example.zhy_gdapp.dialog.Dialog_in;
+import com.example.zhy_gdapp.dialog.Dialog_out;
 import com.example.zhy_gdapp.utils.SharePreUtils;
 
 import java.io.IOException;
@@ -92,6 +95,14 @@ public class SecondFragment extends Fragment {
         }catch (Exception e){
             e.printStackTrace();
         }
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                newDialog();
+            }
+        });
+
         return messageLayout;
     }
 
@@ -216,6 +227,12 @@ public class SecondFragment extends Fragment {
             }
         });
         return  dd;
+    }
 
+    Dialog_out dialog_out;
+    private void  newDialog(){
+        dialog_out = new Dialog_out();
+        final  View view = dialog_out.getView();
+        dialog_out.show(getChildFragmentManager(),"dialog_out");
     }
 }
