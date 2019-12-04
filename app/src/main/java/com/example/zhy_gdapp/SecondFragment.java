@@ -1,12 +1,15 @@
 package com.example.zhy_gdapp;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -17,6 +20,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.zhy_gdapp.adapter.OuterAdapter;
 import com.example.zhy_gdapp.adapter.PersonAdapter;
+import com.example.zhy_gdapp.adminac.DelposterActivity;
+import com.example.zhy_gdapp.beans.Comments;
 import com.example.zhy_gdapp.beans.Outorder;
 import com.example.zhy_gdapp.beans.Person;
 import com.example.zhy_gdapp.dialog.Dialog_out;
@@ -24,6 +29,7 @@ import com.example.zhy_gdapp.utils.SharePreUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import okhttp3.Call;
@@ -42,6 +48,7 @@ public class SecondFragment extends Fragment {
     PersonAdapter personAdapter;
     private Handler handler = null;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View messageLayout = inflater.inflate(R.layout.two_fragment,container,false);
@@ -94,12 +101,29 @@ public class SecondFragment extends Fragment {
             e.printStackTrace();
         }
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                newDialog(listod.get(position),typee);
-            }
-        });
+        if(!typee.equals("0")){
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    newDialog(listod.get(position),typee);
+                }
+            });
+        }
+        if(typee.equals("0")){
+            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                    Person per = listp.get(position);
+                    Intent intent = new Intent(getActivity(), DelposterActivity.class);
+                    intent.putExtra("ph",per.getUserphone());
+                    intent.putExtra("user",per.getUsername());
+                    Log.d(TAG,per.toString());
+                    startActivity(intent);
+                    return false;
+                }
+            });
+        }
 
         return messageLayout;
     }
@@ -162,6 +186,7 @@ public class SecondFragment extends Fragment {
                         String kuaidid = wonm.getString("kuaidid");
                         Outorder od = new Outorder(id,uname,uphone,areaid,uaddr,gname,gphone,gaddr,time,state,poster,kuaidid);
                         oo.add(od);
+                        Collections.reverse(oo);
                     }
 //                    orderAdapter.notifyDataSetChanged();
                     Log.d(TAG,oo.get(0).toString());

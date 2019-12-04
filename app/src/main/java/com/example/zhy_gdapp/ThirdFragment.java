@@ -61,6 +61,7 @@ public class ThirdFragment extends Fragment implements View.OnClickListener{
         bt_post.setOnClickListener(this);
         bt_send.setOnClickListener(this);
         bt_add.setOnClickListener(this);
+
         bt_change.setOnClickListener(this);
         bt_exit.setOnClickListener(this);
 
@@ -88,6 +89,7 @@ public class ThirdFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.thfr_bt_th:
                 startActivity(new Intent(getActivity(), ChangepassActivity.class));
+                break;
             case R.id.thfr_bt_outs:
                 startActivity(new Intent(getActivity(),PoseroutActivity.class));
                 break;

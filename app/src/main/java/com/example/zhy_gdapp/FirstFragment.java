@@ -25,6 +25,7 @@ import com.example.zhy_gdapp.utils.SharePreUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import okhttp3.Call;
@@ -104,7 +105,6 @@ public class FirstFragment extends Fragment {
                 }
             });
         }
-
         return messageLayout;
     }
 
@@ -159,6 +159,7 @@ public class FirstFragment extends Fragment {
                         Log.d("wonm",getpost+orderid);
                         Orders od = new Orders(orderid,getuser,poster,state,getpost,timee);
                         oo.add(od);
+                        Collections.reverse(oo);
                     }
 //                    orderAdapter.notifyDataSetChanged();
                     Log.d("firstfragment",oo.get(0).toString());
@@ -235,5 +236,4 @@ public class FirstFragment extends Fragment {
         final  View view = dialog_in.getView();
         dialog_in.show(getChildFragmentManager(),"dialog_in");
     }
-
 }

@@ -86,7 +86,7 @@ public class AddposterActivity extends Activity implements View.OnClickListener{
                 String res = response.body().string();
                 Log.d("res---------add",res);
                 com.alibaba.fastjson.JSONObject json = JSONObject.parseObject(res);
-                if(json.getString("result").equals("True")){
+                if(json.getString("result").equals("true")){
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

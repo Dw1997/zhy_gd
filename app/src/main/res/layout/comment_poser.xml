@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/cpd_bt1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00612929"
+        android:gravity="center|left"
+        android:text="《===" />
+
+    <ListView
+        android:id="@+id/cpd_lv1"
+        android:layout_width="match_parent"
+        android:layout_height="623dp">
+
+    </ListView>
+
+    <Button
+        android:id="@+id/cpd_bt2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="删除此快递员" />
+
+</LinearLayout>

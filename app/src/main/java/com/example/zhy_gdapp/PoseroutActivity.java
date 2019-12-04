@@ -3,10 +3,10 @@ package com.example.zhy_gdapp;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,6 +21,7 @@ import com.example.zhy_gdapp.utils.SharePreUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import okhttp3.Call;
@@ -78,6 +79,26 @@ public class PoseroutActivity extends Activity {
                 newDialog(listod.get(position),SharePreUtils.getType(PoseroutActivity.this));
             }
         });
+
+        lv.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                switch (scrollState){
+                    case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:{
+                        if(lv.getFirstVisiblePosition() == 0)
+                        {
+                            listod = getorders();
+                            outerAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
     }
 
     private void InitView(){
@@ -125,6 +146,7 @@ public class PoseroutActivity extends Activity {
                         String kuaidid = wonm.getString("kuaidid");
                         Outorder od = new Outorder(id,uname,uphone,areaid,uaddr,gname,gphone,gaddr,time,state,poster,kuaidid);
                         oo.add(od);
+                        Collections.reverse(oo);
                     }
                     Log.d(TAG,oo.get(0).toString());
 
