@@ -12,8 +12,6 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.zhy_gdapp.R;
-import com.example.zhy_gdapp.RegsiterActivity;
-
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -94,7 +92,6 @@ public class ChangepassActivity extends Activity implements ViewGroup.OnClickLis
 
                         }
                     });
-//                    startActivity(new Intent(RegsiterActivity.this, MainActivity.class));
                 }
                 else
                     runOnUiThread(new Runnable() {

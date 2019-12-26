@@ -46,8 +46,20 @@
         android:text="修改密码" />
 
     <Button
+        android:id="@+id/yi_btup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="检查更新" />
+
+    <Button
         android:id="@+id/thfr_bt_exit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="退出登录" />
+
+    <ProgressBar
+        android:id="@+id/yi_pb"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

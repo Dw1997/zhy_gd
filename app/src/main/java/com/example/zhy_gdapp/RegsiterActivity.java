@@ -88,7 +88,7 @@ public class RegsiterActivity extends AppCompatActivity implements View.OnClickL
             public void onResponse(Call call, Response response) throws IOException {
                 String res = response.body().string();
                 com.alibaba.fastjson.JSONObject json = JSONObject.parseObject(res);
-                if(json.getString("result").equals("True")){
+                if(json.getString("result").equals("true")){
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

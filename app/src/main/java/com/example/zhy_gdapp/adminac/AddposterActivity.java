@@ -61,7 +61,7 @@ public class AddposterActivity extends Activity implements View.OnClickListener{
         String name = et_name.getText().toString();
         String pass = et_pass.getText().toString();
         String area = SharePreUtils.getArea(AddposterActivity.this);
-        String url = "http://dwy.dwhhh.cn/zhy/api/addposter?phone="+phone+"&name="+name+"&pass="+pass+"&area"+area;
+        String url = "http://dwy.dwhhh.cn/zhy/api/addposter?phone="+phone+"&name="+name+"&pass="+pass+"&area="+area;
         Log.d("reurl",url);
         if(phone.length()!=11){
             Toast.makeText(AddposterActivity.this,"手机号为11位",Toast.LENGTH_LONG).show();
